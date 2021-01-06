@@ -2,6 +2,8 @@ use structopt::StructOpt;
 use std::fs;
 use std::path::Path;
 
+mod templates;
+
 #[derive(Debug, StructOpt)]
 struct Cli {
     pub dir_name: String,
@@ -9,12 +11,9 @@ struct Cli {
 
 fn main() -> std::io::Result<()>{
     let args = Cli::from_args();
-
-    let index_content = fs::read_to_string("./bin/template/index.html")
-                            .expect("Something went wrong reading the file");
     
-    let style_content = fs::read_to_string("./bin/template/style.css")
-                            .expect("Something went wrong reading the file");
+    let index_content = templates::create_html_str(&args.dir_name);
+    let style_content = templates::create_style_str();
 
     let index_path_string = format!("./{}/index.html", &args.dir_name);
     let style_path_string = format!("./{}/style.css", &args.dir_name);
