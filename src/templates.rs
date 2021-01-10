@@ -30,7 +30,7 @@ pub fn create_html_str(day: &String) -> String {
 }
 
 
-pub fn create_style_str() -> String {
+pub fn create_css_str() -> String {
     let css = String::from(r#"
 html {
     box-sizing: border-box;
